@@ -1,0 +1,170 @@
+<?php // Login form, no backend logic yet ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | BarangayHub</title>
+    <link rel="icon" href="assets/logoo.png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            background: url('assets/cover.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+        .bg-blur {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(13, 110, 253, 0.45);
+            backdrop-filter: blur(4px);
+            z-index: 0;
+        }
+        .login-card {
+            z-index: 1;
+            background: rgba(255,255,255,0.92);
+            border-radius: 2.2rem;
+            box-shadow: 0 12px 48px rgba(13,110,253,0.13), 0 2px 8px rgba(0,0,0,0.08);
+            padding: 3.5rem 2.5rem 2.5rem 2.5rem;
+            max-width: 440px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .login-accent {
+            width: 70px;
+            height: 6px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #1976d2 0%, #28a745 100%);
+            box-shadow: 0 2px 8px rgba(25,118,210,0.10);
+            margin: 0 auto 1.5rem auto;
+        }
+        .logo {
+            width: 82px;
+            height: 82px;
+            object-fit: contain;
+            margin-bottom: 0.7rem;
+            border-radius: 50%;
+            box-shadow: 0 4px 18px rgba(25, 118, 210, 0.13);
+            background: #fff;
+            padding: 4px;
+        }
+        .system-title {
+            font-size: 1.32em;
+            font-weight: 800;
+            color: #1976d2;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.2rem;
+        }
+        .system-subtitle {
+            font-size: 1.01em;
+            color: #3a3a3a;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+        }
+        .form-floating > .form-control:focus ~ label {
+            color: #0d6efd;
+        }
+        .form-floating .form-control {
+            font-size: 1.08em;
+            padding-top: 1.2rem;
+            padding-bottom: 1.2rem;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888;
+        }
+        .form-check-label, .form-check-input {
+            cursor: pointer;
+        }
+        .form-links {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.05em;
+            margin-bottom: 1.2rem;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 2.2rem;
+            color: #bbb;
+            font-size: 1.05em;
+        }
+        .form-footer a {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        .btn-primary {
+            font-size: 1.13em;
+            font-weight: 600;
+            border-radius: 2em;
+            padding: 0.7em 0;
+            box-shadow: 0 2px 8px rgba(25,118,210,0.08);
+        }
+        @media (max-width: 600px) {
+            .login-card { padding: 2rem 0.7rem; max-width: 98vw; }
+            .logo { width: 60px; height: 60px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-blur"></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="login-card w-100">
+            <div class="text-center mb-4">
+                <div class="login-accent"></div>
+                <a href="index.php"><img src="assets/logoo.png" alt="Logo" class="logo"></a>
+                <div class="system-title">BarangayHub</div>
+                <div class="system-subtitle">Management Information System<br>of Barangay Luzviminda Uno</div>
+            </div>
+            <form method="post" autocomplete="off" novalidate>
+                <div class="form-floating mb-3 position-relative">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="form-floating mb-2 position-relative">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <label for="password">Password</label>
+                    <span class="eye-icon" onclick="togglePassword('password', this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.12 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.133 13.133 0 0 1 1.172 8z"/>
+                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm0 1a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="form-links mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="remember" id="remember" name="remember">
+                        <label class="form-check-label" for="remember">Remember me</label>
+                    </div>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button class="btn btn-primary w-100 mb-2" type="submit">Log in</button>
+            </form>
+            <div class="form-footer">
+                Don't have an account? <a href="register.php">Sign up</a>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        function togglePassword(id, el) {
+            const input = document.getElementById(id);
+            if (input.type === 'password') {
+                input.type = 'text';
+                el.innerHTML = `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' viewBox='0 0 16 16'><path d='M13.359 11.238l2.122 2.122a.75.75 0 1 1-1.06 1.06l-2.122-2.121A7.97 7.97 0 0 1 8 13.5c-5 0-8-5.5-8-5.5a15.634 15.634 0 0 1 3.34-3.778l-2.12-2.12a.75.75 0 1 1 1.06-1.06l14 14a.75.75 0 0 1-1.06 1.06l-2.121-2.122zM8 12.5c2.12 0 3.879-1.168 5.168-2.457A13.133 13.133 0 0 0 14.828 8c-.058-.087-.122-.183-.195-.288-.335-.48-.83-1.12-1.465-1.755C11.879 4.668 10.12 3.5 8 3.5c-.638 0-1.25.07-1.828.2l1.53 1.53A2.5 2.5 0 0 1 10.5 8c0 .638-.07 1.25-.2 1.828l1.53 1.53c.13-.578.2-1.19.2-1.828z'/></svg>`;
+            } else {
+                input.type = 'password';
+                el.innerHTML = `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' viewBox='0 0 16 16'><path d='M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.12 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.133 13.133 0 0 1 1.172 8z'/><path d='M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm0 1a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z'/></svg>`;
+            }
+        }
+    </script>
+</body>
+</html> 

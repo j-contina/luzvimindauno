@@ -1,0 +1,98 @@
+<?php // Admin Register ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration | Barangay Luzviminda Uno</title>
+    <link rel="icon" href="../assets/logoo.png">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, #3793ff 0%, #005eff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .register-container {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(13,110,253,0.10);
+            padding: 2.5rem 2rem 2rem 2rem;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .register-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 1.2rem;
+        }
+        .register-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0d6efd;
+            margin-bottom: 0.5rem;
+        }
+        .register-subtitle {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        .form-control {
+            border-radius: 8px;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        .btn-primary {
+            background: #0d6efd;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            padding: 0.6rem 0;
+            width: 100%;
+            font-size: 1rem;
+            transition: background 0.18s;
+        }
+        .btn-primary:hover {
+            background: #005eff;
+        }
+        .form-text {
+            font-size: 0.85rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body style="background: url('../assets/cover.jpg') no-repeat center center fixed; background-size: cover; position: relative; min-height: 100vh;">
+    <div class="bg-blur"></div>
+    <div class="register-container">
+        <img src="../assets/logoo.png" alt="Logo" class="register-logo">
+        <div class="register-title">Admin Registration</div>
+        <div class="register-subtitle">Create a System Administrator Account</div>
+        <form method="post" action="register_process.php">
+            <input type="hidden" name="role" value="admin">
+            <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+            <input type="email" name="email" class="form-control" placeholder="Email" required>
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
+            <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+        <div class="form-text mt-3">
+            Already have an account? <a href="login.php">Login as Admin</a>
+        </div>
+    </div>
+    <style>
+        .bg-blur {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(13, 110, 253, 0.45);
+            backdrop-filter: blur(4px);
+            z-index: 0;
+        }
+        .register-container { position: relative; z-index: 2; }
+    </style>
+</body>
+</html> 

@@ -1,0 +1,963 @@
+<?php // Modern Barangay Management Information System Homepage ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barangay Luzviminda Uno | Management Information System</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="icon" href="assets/logoo.png">
+    <style>
+        :root {
+            --primary-blue: #0d6efd;
+            --accent-green: #28a745;
+            --light-gray: #f8f9fa;
+            --card-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        body {
+            background: var(--light-gray);
+            color: #222;
+            font-weight: 400;
+            font-size: 0.80em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        p {
+            font-weight: 700;
+            font-size: 0.60em;
+            line-height: 1.4;
+            letter-spacing: 0.2px;
+        }
+        .top-bar {
+            background: linear-gradient(90deg, #3793ff 0%, #005eff 100%);
+            color: #fff;
+            font-size: 1em;
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 8px rgba(13,110,253,0.08);
+        }
+        .top-bar .brand-title {
+            font-weight: 300;
+            font-size: 0.85em;
+            letter-spacing: 0.3px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .top-bar .icon-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 50%;
+            width: 2.1em;
+            height: 2.1em;
+            justify-content: center;
+            margin-right: 0.4em;
+            box-shadow: 0 2px 8px rgba(13,110,253,0.10);
+            transition: background 0.18s;
+        }
+        .top-bar .icon-btn img {
+            width: 1.2em;
+            height: 1.2em;
+        }
+        .top-bar a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 1.2rem;
+            font-weight: 500;
+            transition: color 0.18s;
+        }
+        .top-bar a:hover {
+            color: #ffd700;
+        }
+        .top-bar .login-btn {
+            background: #fff;
+            color: #0d6efd;
+            border-radius: 50%;
+            width: 2.1em;
+            height: 2.1em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.4em;
+            box-shadow: 0 2px 8px rgba(13,110,253,0.10);
+        }
+        .top-bar .login-btn img {
+            width: 1.2em;
+            height: 1.2em;
+        }
+        .navbar {
+            background: #fff !important;
+            box-shadow: 0 2px 8px rgba(13,110,253,0.04);
+            z-index: 1030;
+        }
+        .navbar-brand img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+        .search-form {
+            border-radius: 2em;
+            box-shadow: 0 2px 8px rgba(13,110,253,0.08);
+            overflow: hidden;
+            background: #fff;
+        }
+        .search-form input[type="search"] {
+            border: none;
+            border-radius: 2em 0 0 2em;
+            box-shadow: none;
+            padding-left: 1.2em;
+        }
+        .search-form input[type="search"]:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        .search-form button {
+            background: #0d6efd;
+            border: none;
+            border-radius: 0 2em 2em 0;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.375rem 1.1rem;
+            transition: background 0.18s;
+        }
+        .search-form button:hover {
+            background: #005eff;
+        }
+        .search-form svg {
+            display: block;
+        }
+        .icon-svg {
+            width: 2.2rem;
+            height: 2.2rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .hero-section {
+            position: relative;
+            background: url('assets/cover.jpg') no-repeat center center/cover;
+            min-height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(13, 110, 253, 0.45);
+            backdrop-filter: blur(2px);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+        }
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        }
+        .quick-links {
+            margin-top: 2.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .quick-link-card {
+            background: #fff;
+            color: var(--primary-blue);
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            padding: 1.2rem 2.2rem;
+            min-width: 170px;
+            text-align: center;
+            transition: transform 0.18s, box-shadow 0.18s;
+            cursor: pointer;
+        }
+        .quick-link-card:hover {
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 8px 32px rgba(13,110,253,0.12);
+            color: var(--accent-green);
+        }
+        .quick-link-card .icon-svg {
+            margin-bottom: 0.5rem;
+        }
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem 0;
+            color: var(--primary-blue);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .announcements, .events {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            padding: 1.5rem 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .announcement-item, .event-item {
+            border-left: 4px solid var(--primary-blue);
+            padding-left: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .announcement-item:last-child, .event-item:last-child { margin-bottom: 0; }
+        .announcement-item .icon-svg, .event-item .icon-svg {
+            margin-bottom: 0;
+        }
+        .captain-section {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            padding: 2rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+        .captain-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid var(--primary-blue);
+            background: #fff;
+            margin: 0 auto;
+            display: block;
+        }
+        .captain-logo-bg {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto;
+        }
+        .captain-logo-bg img {
+            width: 100%; height: 100%; object-fit: contain; position: absolute; top: 0; left: 0;
+        }
+        .captain-logo-bg .captain-photo {
+            position: absolute; top: 10px; left: 10px; z-index: 2;
+        }
+        .captain-message {
+            flex: 1 1 320px;
+        }
+        .captain-message h3 {
+            color: var(--primary-blue);
+            font-weight: 800;
+        }
+        .services-section {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            padding: 2rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .service-card {
+            background: var(--light-gray);
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(13,110,253,0.06);
+            padding: 1.2rem 1rem;
+            text-align: center;
+            transition: transform 0.16s, box-shadow 0.16s;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+        .service-card:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 6px 24px rgba(40,167,69,0.13);
+            color: var(--accent-green);
+        }
+        .service-card .icon-svg {
+            margin-bottom: 0.5rem;
+        }
+        .feedback-section {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            padding: 2rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .footer {
+            background: #fff;
+            color: var(--primary-blue);
+            border-top: 1px solid #e0e0e0;
+        }
+        .footer a { color: var(--primary-blue); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .footer .footer-logo {
+            width: 48px; height: 48px; object-fit: contain;
+        }
+        @media (max-width: 991px) {
+            .quick-links { flex-direction: column; gap: 1.2rem; }
+            .captain-section { flex-direction: column; align-items: flex-start; }
+        }
+        .carousel-indicators button {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #d1d5db;
+            border: none;
+            margin: 0 4px;
+            opacity: 1;
+            transition: background 0.2s;
+        }
+        .carousel-indicators .active {
+            background-color: #0d6efd;
+        }
+        .quick-link-title {
+            font-weight: bold;
+            margin-top: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        .navbar-nav .nav-link {
+            position: relative;
+            transition: color 0.18s;
+        }
+        .navbar-nav .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: width 0.25s cubic-bezier(.4,2,.3,1);
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus {
+            color: var(--primary-blue);
+        }
+        .navbar-nav .nav-link:hover::after, .navbar-nav .nav-link:focus::after {
+            width: 100%;
+        }
+        .readmore-btn:hover, .readmore-btn:focus {
+            background: #1976d2 !important;
+            color: #fff !important;
+            border-color: #1976d2 !important;
+        }
+        .view-all-services-btn:hover, .view-all-services-btn:focus {
+            background: #1976d2 !important;
+            color: #fff !important;
+            border-color: #1976d2 !important;
+            animation: bounce-color 0.6s linear;
+        }
+        @keyframes bounce-color {
+            0% {
+                transform: scale(1);
+                background: #fff;
+                color: #1976d2;
+            }
+            20% {
+                transform: scale(1.08, 0.92);
+                background: #1976d2;
+                color: #fff;
+            }
+            40% {
+                transform: scale(0.96, 1.06);
+                background: #1976d2;
+                color: #fff;
+            }
+            60% {
+                transform: scale(1.04, 0.98);
+                background: #28a745;
+                color: #fff;
+            }
+            80% {
+                transform: scale(0.98, 1.02);
+                background: #1976d2;
+                color: #fff;
+            }
+            100% {
+                transform: scale(1);
+                background: #1976d2;
+                color: #fff;
+            }
+        }
+        .captain-img-bg {
+            background: radial-gradient(circle at 60% 40%, #e3f0ff 60%, #fff 100%);
+            border-radius: 50%;
+            width: 340px;
+            height: 340px;
+            box-shadow: 0 8px 32px rgba(25, 118, 210, 0.10);
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        .captain-img {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 4px 18px rgba(25, 118, 210, 0.10);
+            background: #f8f9fa;
+            border: 4px solid #fff;
+        }
+        @media (max-width: 991px) {
+            .captain-img-bg { width: 220px; height: 220px; }
+            .captain-img { width: 170px; height: 170px; }
+        }
+        .simple-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: 8px 0 8px 0;
+        }
+        .simple-divider-line {
+            border: none;
+            border-top: 1px solid #d6dee4;
+            opacity: 0.55;
+            height: 0;
+            width: 100%;
+            margin: 0;
+        }
+        .simple-divider-line-left {
+            margin-right: 8px;
+        }
+        .simple-divider-line-right {
+            margin-left: 8px;
+        }
+        .simple-divider-logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            z-index: 1;
+        }
+        .simple-divider-logo {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            box-shadow: 0 1px 4px rgba(25,118,210,0.08);
+            background: transparent;
+            padding: 0;
+            display: block;
+        }
+        .footer .icon-svg { width: 20px; height: 20px; object-fit: contain; }
+        @media (max-width: 991px) {
+            .footer .row > div { text-align: center !important; justify-content: center !important; align-items: center !important; }
+            .footer .d-flex.flex-column.flex-md-row { flex-direction: column !important; align-items: center !important; }
+            .footer .ms-md-3 { margin-left: 0 !important; }
+        }
+        .view-all-services-btn, .readmore-btn {
+            transition: background 0.18s, color 0.18s, border 0.18s, transform 0.18s;
+        }
+        .view-all-services-btn:hover, .view-all-services-btn:focus,
+        .readmore-btn:hover, .readmore-btn:focus {
+            background: #1976d2 !important;
+            color: #fff !important;
+            border-color: #1976d2 !important;
+            animation: bounce-color 0.6s linear;
+        }
+        @keyframes bounce-color {
+            0% {
+                transform: scale(1);
+                background: #fff;
+                color: #1976d2;
+            }
+            20% {
+                transform: scale(1.08, 0.92);
+                background: #1976d2;
+                color: #fff;
+            }
+            40% {
+                transform: scale(0.96, 1.06);
+                background: #1976d2;
+                color: #fff;
+            }
+            60% {
+                transform: scale(1.04, 0.98);
+                background: #1976d2;
+                color: #fff;
+            }
+            80% {
+                transform: scale(0.98, 1.02);
+                background: #1976d2;
+                color: #fff;
+            }
+            100% {
+                transform: scale(1);
+                background: #1976d2;
+                color: #fff;
+            }
+        }
+        .feedback-glass-card {
+            background: rgba(255,255,255,0.65);
+            border-radius: 2.2rem;
+            box-shadow: 0 8px 32px rgba(25,118,210,0.10), 0 2px 8px rgba(0,0,0,0.06);
+            backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(25,118,210,0.08);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            max-width: 100%;
+        }
+        .feedback-accent {
+            width: 60px;
+            height: 6px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #1976d2 0%, #28a745 100%);
+            box-shadow: 0 2px 8px rgba(25,118,210,0.10);
+        }
+        .feedback-float .form-control:focus {
+            border-color: #1976d2;
+            box-shadow: 0 0 0 0.15rem rgba(25,118,210,0.10);
+            background: rgba(255,255,255,0.92);
+        }
+        .feedback-input {
+            background: rgba(255,255,255,0.85);
+            border-radius: 1.2rem;
+            border: 1.5px solid #e3eaf3;
+            font-size: 1.05rem;
+            color: #222;
+            transition: border 0.18s, background 0.18s;
+        }
+        .feedback-input:focus {
+            border-color: #1976d2;
+            background: #fff;
+        }
+        .feedback-textarea-icon {
+            left: 0.7rem;
+            pointer-events: none;
+            font-size: 1.2em;
+        }
+        .feedback-submit-btn {
+            background: #fff;
+            color: #1976d2;
+            border: 2px solid #1976d2;
+            border-radius: 2em;
+            font-weight: 600;
+            font-size: 1.08rem;
+            box-shadow: 0 2px 8px rgba(25,118,210,0.08);
+            transition: background 0.18s, color 0.18s, border 0.18s, transform 0.18s;
+        }
+        .feedback-submit-btn:hover, .feedback-submit-btn:focus {
+            background: #1976d2;
+            color: #fff;
+            border-color: #1976d2;
+            animation: bounce-color 0.6s linear;
+        }
+        @media (max-width: 767px) {
+            .feedback-glass-card { padding: 1.2rem 0.7rem; border-radius: 1.2rem; }
+            .feedback-accent { width: 38px; height: 5px; }
+        }
+        .captain-message-justify {
+            text-align: justify;
+            text-align-last: right;
+        }
+        .topbar-link-text {
+            font-weight: 300 !important;
+            font-size: 0.95em;
+            letter-spacing: 0.2px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .topbar-links {
+            margin-right: 2.5rem !important;
+        }
+    .carousel-nav-btns {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .carousel-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: auto;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #carouselPrev.carousel-nav-btn {
+      left: 8px;
+    }
+    #carouselNext.carousel-nav-btn {
+      right: 8px;
+    }
+    .carousel-indicators-custom {
+      margin-top: 18px;
+      gap: 10px;
+    }
+    .carousel-indicators-custom .carousel-indicator-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #d1d5db;
+      transition: background 0.2s;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      display: inline-block;
+    }
+    .carousel-indicators-custom .carousel-indicator-dot.active {
+      background: #0d6efd;
+    }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar d-flex justify-content-center align-items-center position-relative" style="padding-left:0;padding-right:0;">
+        <div class="brand-title w-100 text-center" style="position:absolute;left:0;right:0;margin:auto;z-index:1;">The Official Website of Barangay Luzviminda 1</div>
+        <div class="ms-auto d-flex align-items-center position-relative topbar-links" style="z-index:2; margin-right: 2.5rem;">
+            <a href="#" class="d-inline-flex align-items-center topbar-link" style="margin-right:1.2rem;">
+                <!-- Facebook logo: if not visible, check that assets/facebook-logo.svg exists and is a valid SVG -->
+                <span class="icon-btn" style="background:#fff; border:1px solid #eee;">
+                    <img src="../assets/facebook-logo.svg" alt="Facebook" onerror="this.style.display='none';this.parentNode.style.background='#eee';this.parentNode.style.border='1px solid #ccc';">
+                </span>
+                <span class="d-none d-md-inline topbar-link-text">Facebook</span>
+            </a>
+            <a href="login.php" class="d-inline-flex align-items-center topbar-link">
+                <span class="login-btn"><img src="assets/user.svg" alt="Log in"></span>
+                <span class="d-none d-md-inline topbar-link-text">Log in</span>
+            </a>
+        </div>
+    </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top py-2">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="assets/logoo.png" alt="Barangay Logo">
+                <span class="ms-2 fw-bold" style="color:var(--primary-blue);font-size:1.2rem;">Barangay Luzviminda Uno</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#">The Barangay</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#officials">Barangay Officials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+                </ul>
+                <form class="d-flex ms-lg-3 mt-2 mt-lg-0 search-form" role="search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    <button type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="17.12" viewBox="0 0 18 17.12">
+                          <path id="Vector" d="M16.6,17.12l-6.3-5.992a6.055,6.055,0,0,1-1.725.9,6.378,6.378,0,0,1-2.075.333,6.443,6.443,0,0,1-4.613-1.8A5.823,5.823,0,0,1,0,6.182,5.823,5.823,0,0,1,1.887,1.8,6.443,6.443,0,0,1,6.5,0a6.443,6.443,0,0,1,4.613,1.8A5.823,5.823,0,0,1,13,6.182,5.611,5.611,0,0,1,11.7,9.8L18,15.789ZM6.5,10.462A4.455,4.455,0,0,0,9.688,9.214,4.028,4.028,0,0,0,11,6.182,4.028,4.028,0,0,0,9.688,3.151,4.455,4.455,0,0,0,6.5,1.9,4.455,4.455,0,0,0,3.313,3.151,4.028,4.028,0,0,0,2,6.182,4.028,4.028,0,0,0,3.313,9.214,4.455,4.455,0,0,0,6.5,10.462Z" fill="#fff"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="mb-3" style="margin-top: 50px;">WELCOME TO<br>BARANGAY LUZVIMINDA UNO</h1>
+            <!-- Quick Links Custom Sliding Carousel -->
+            <section class="container my-5">
+                <div class="position-relative d-flex justify-content-center" style="overflow:hidden;">
+                  <div id="carouselCardsWrapper" style="width:732px; max-width:100%; overflow:hidden; position:relative;">
+                    <div class="d-flex" id="carouselCardsRow" style="transition: transform 0.5s cubic-bezier(.4,2,.3,1); will-change: transform;">
+                    <div class="card shadow-sm p-4 text-center" style="min-width:220px; border-radius:16px; margin-right:24px;">
+                      <img src="assets/online-services.svg" alt="Online Services" style="width:48px;height:48px;" class="mx-auto d-block">
+                      <div class="quick-link-title">Online Services</div>
+                    </div>
+                    <div class="card shadow-sm p-4 text-center" style="min-width:220px; border-radius:16px; margin-right:24px;">
+                      <img src="assets/awards.svg" alt="Awards" style="width:48px;height:48px;" class="mx-auto d-block">
+                      <div class="quick-link-title">Awards</div>
+                    </div>
+                    <div class="card shadow-sm p-4 text-center" style="min-width:220px; border-radius:16px; margin-right:24px;">
+                      <img src="assets/gad-corner.svg" alt="GAD Corner" style="width:48px;height:48px;" class="mx-auto d-block">
+                      <div class="quick-link-title">GAD Corner</div>
+                    </div>
+                    <div class="card shadow-sm p-4 text-center" style="min-width:220px; border-radius:16px; margin-right:24px;">
+                      <img src="assets/announcement.png" alt="Announcements" style="width:48px;height:48px;" class="mx-auto d-block">
+                      <div class="quick-link-title">Announcements</div>
+                    </div>
+                    <div class="card shadow-sm p-4 text-center" style="min-width:220px; border-radius:16px; margin-right:24px;">
+                      <img src="assets/events.png" alt="Events" style="width:48px;height:48px;" class="mx-auto d-block">
+                      <div class="quick-link-title">Events</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-nav-btns">
+                  <button id="carouselPrev" class="btn btn-primary carousel-nav-btn">&#8592;</button>
+                  <button id="carouselNext" class="btn btn-primary carousel-nav-btn">&#8594;</button>
+                </div>
+              </div>
+              <div id="carouselIndicators" class="carousel-indicators-custom d-flex justify-content-center align-items-center mt-3"></div>
+            </section>
+        </div>
+    </section>
+
+    
+    <!-- Captain's Corner Section -->
+    <div style="height: 64px;"></div>
+
+    <section class="container" style="margin-top: 120px;">
+        <h2 class="text-center mb-4" style="color: #1976d2; font-weight: 800; font-size: 2.7rem; letter-spacing: 1px;">The Captain's Corner</h2>
+        <div class="row align-items-center justify-content-center g-4 flex-md-row flex-column">
+            <!-- Left: Captain's Image -->
+            <div class="col-md-5 d-flex flex-column align-items-center justify-content-center mb-4 mb-md-0">
+                <div class="captain-img-bg d-flex align-items-center justify-content-center mb-3">
+                    <img src="assets/logo.jpg" alt="Kap. Jeffry D. Galit" class="img-fluid captain-img">
+                </div>
+                <div class="fw-bold mt-2" style="font-size: 1.18rem; color:#222;">KAP. JEFFRY D. GALIT</div>
+                <div style="color: #666; font-size: 1.05rem;">Barangay Captain, Brgy. Luzviminda Uno</div>
+            </div>
+            <!-- Right: Captain's Message -->
+            <div class="col-md-7">
+                <div class="captain-message-justify" style="font-size: 1.08rem; color: #222; margin-bottom: 1.5rem;">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc suscipit pharetra nunc. Vitae dictum libero lacinia et. In eu velit eu quam elementum luctus. Integer euismod facilisis ligula. Etiam euismod, nisi non sollicitudin, turpis elit cursus magna, aliquet placerat neque.
+                </div>
+                <a href="#" class="btn btn-success px-4 py-2 shadow-sm readmore-btn" style="font-weight: 500; border-radius: 2em; background: #fff; color: #1976d2; border: 2px solid #1976d2; transition: background 0.2s, color 0.2s, border 0.2s;">Read More</a>
+            </div>
+        </div>
+        <!-- Social Media Section Placeholder -->
+        <div class="row mt-5">
+            <div class="col-md-7 offset-md-5">
+                <div class="fw-bold mb-2" style="font-size:1.25rem; color:#222;">Social Media</div>
+                <!-- You can embed a Facebook page here if desired -->
+                <div style="background:#f4f6fa; border-radius:12px; min-height:120px; display:flex; align-items:center; justify-content:center; color:#aaa; font-size:1.1rem;">Social Media Embed Placeholder</div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section -->
+    <section class="container mt-5" id="services">
+        <!-- Decorative divider with logo -->
+        <div class="d-flex align-items-center mb-4" style="margin-top: 250px;">
+            <hr class="flex-grow-1" style="border-top: 2px solid #1976d2; opacity: 0.18;">
+            <img src="assets/logoo.png" alt="Brgy Logo" style="width:32px;height:32px;margin:0 18px;filter: drop-shadow(0 2px 6px rgba(25,118,210,0.18));">
+            <hr class="flex-grow-1" style="border-top: 2px solid #1976d2; opacity: 0.18;">
+        </div>
+        <h2 class="text-center mb-2" style="color: #1976d2; font-weight: 800; font-size: 2.3rem; letter-spacing: 1px; margin-top: 50px;">Barangay Luzviminda Uno Services</h2>
+        <div class="text-center mb-4" style="max-width: 800px; margin: 0 auto; color: #222; font-size: 1.00rem; margin-top: 25px;">
+            Brgy. Luzviminda Uno offers numerous services to meet the needs of the public and to provide good governance.<br>
+            A community where the needs of its citizens are given top priority in all areas, including education, health, business, and career opportunities.
+            The Brgy. Luzviminda Uno urges the locals to get in touch with the various offices to learn more about the services the baranga offers.
+        </div>
+        <div class="row justify-content-center g-4 mb-4" style="margin-top: 100px;">
+            <div class="col-md-4 d-flex">
+                <div class="service-card flex-fill d-flex flex-column align-items-center justify-content-center h-100 p-4">
+                    <img src="assets/social-services.svg" alt="Social Services" class="icon-svg mb-2" style="width:48px;height:48px;">
+                    <div class="fw-bold mb-2" style="font-size:1.18rem; color:#1976d2;">Social Services</div>
+                    <div style="color:#222; font-size:1.01rem;">Services that support education, public health, and community development.</div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex">
+                <div class="service-card flex-fill d-flex flex-column align-items-center justify-content-center h-100 p-4">
+                    <img src="assets/civil-registrar.svg" alt="Civil Registrar" class="icon-svg mb-2" style="width:48px;height:48px;">
+                    <div class="fw-bold mb-2" style="font-size:1.18rem; color:#1976d2;">Civil Registrar</div>
+                    <div style="color:#222; font-size:1.01rem;">Accurate and secure documentation for your legal and statistical needs.</div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex">
+                <div class="service-card flex-fill d-flex flex-column align-items-center justify-content-center h-100 p-4">
+                    <img src="assets/health-services.svg" alt="Health Services" class="icon-svg mb-2" style="width:48px;height:48px;">
+                    <div class="fw-bold mb-2" style="font-size:1.18rem; color:#1976d2;">Health Services</div>
+                    <div style="color:#222; font-size:1.01rem;">Offers reliable and proficient public health services to our community.</div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-2">
+            <a href="#" class="btn view-all-services-btn" style="background:#fff; color:#1976d2; font-weight:600; border-radius:20px; border:2px solid #1976d2; padding:0.45rem 1.3rem; font-size:0.98rem; transition:background 0.18s, color 0.18s, border 0.18s; margin-top: 100px;">VIEW ALL SERVICES</a>
+        </div>
+    </section>
+    <!-- Feedback Section -->
+    <section class="container my-5" id="feedback">
+      <div class="row justify-content-center" style="margin-top: 200px;">
+        <div class="col-lg-10">
+          <div class="feedback-glass-card p-4 p-md-5 mx-auto">
+            <div class="feedback-accent mb-3 mx-auto"></div>
+            <h2 class="text-center mb-3" style="font-weight: 800; color: #1976d2; letter-spacing: 1px;">We Value Your Feedback</h2>
+            <p class="text-center mb-4" style="color: #444; font-size: 1.08rem;">Help us improve our services! Share your thoughts, suggestions, or concerns below. Your feedback is important to us.</p>
+            <form method="post" autocomplete="off">
+              <div class="row g-3 mb-2">
+                <div class="col-md-6">
+                  <div class="form-floating feedback-float">
+                    <input type="text" class="form-control feedback-input" id="fb-name" name="name" placeholder="Your Name" required>
+                    <label for="fb-name">Your Name</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating feedback-float">
+                    <input type="email" class="form-control feedback-input" id="fb-email" name="email" placeholder="Your Email" required>
+                    <label for="fb-email">Your Email</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-floating feedback-float mb-3">
+                <input type="text" class="form-control feedback-input" id="fb-subject" name="subject" placeholder="Subject" required>
+                <label for="fb-subject">Subject</label>
+              </div>
+              <div class="form-floating feedback-float mb-4 position-relative">
+                <textarea class="form-control feedback-input" id="fb-message" name="message" placeholder="Your Feedback" style="height: 120px; resize: vertical; padding-left: 2.5rem;" required></textarea>
+                <label for="fb-message">Your Feedback</label>
+                <span class="feedback-textarea-icon position-absolute top-50 start-0 translate-middle-y ms-3" style="color:#1976d2; opacity:0.18;">
+                  <svg width="22" height="22" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.93 6.588-4.29 4.29a.75.75 0 0 1-1.06 0l-2.15-2.15a.75.75 0 1 1 1.06-1.06l1.62 1.62 3.76-3.76a.75.75 0 1 1 1.06 1.06z"/></svg>
+                </span>
+              </div>
+              <div class="text-center mt-3">
+                <button type="submit" class="btn feedback-submit-btn px-5 py-2">Send Feedback</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer mt-auto p-0" style="background: #fff; color: var(--primary-blue); border-top: 1px solid #e0e0e0;">
+        <div class="container py-5">
+            <div class="row align-items-center justify-content-center text-center text-md-start">
+                <!-- Left: Logo and Contact -->
+                <div class="col-md-5 mb-4 mb-md-0 d-flex flex-column flex-md-row align-items-center align-items-md-start gap-3">
+                    <img src="assets/logoo.png" alt="Barangay Logo" style="width:64px;height:64px;object-fit:contain;">
+                    <div class="text-start ms-md-3">
+                        <div class="mb-2 d-flex align-items-center" style="color: var(--primary-blue);">
+                            <img src="assets/location.svg" alt="Address" class="icon-svg me-2" style="width:20px;" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<i class=\'bi bi-geo-alt\'></i>')">
+                            Brgy. Luzviminda Uno, Dasmarinas City, Cavite
+                        </div>
+                        <div class="mb-2 d-flex align-items-center" style="color: var(--primary-blue);">
+                            <img src="assets/contact.svg" alt="Contact Number" class="icon-svg me-2" style="width:20px;" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<i class=\'bi bi-telephone\'></i>')">
+                            0929-122-4117
+                        </div>
+                        <div class="d-flex align-items-center" style="color: var(--primary-blue);">
+                            <img src="assets/email.svg" alt="Email" class="icon-svg me-2" style="width:20px;" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<i class=\'bi bi-envelope\'></i>')">
+                            BrgyLuzviminda1@gmail.com
+                        </div>
+                    </div>
+                </div>
+                <!-- Center: Menu Links -->
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <div class="fw-bold mb-2" style="color: var(--primary-blue);">Menu Links</div>
+                    <div class="d-flex flex-column align-items-center align-items-md-start">
+                        <a href="#" class="mb-1" style="color: var(--primary-blue); text-decoration: none;">Online Services</a>
+                        <a href="#" class="mb-1" style="color: var(--primary-blue); text-decoration: none;">BIDS And Awards</a>
+                        <a href="#" class="mb-1" style="color: var(--primary-blue); text-decoration: none;">GAD</a>
+                        <a href="#" class="mb-1" style="color: var(--primary-blue); text-decoration: none;">Hire Me</a>
+                        <a href="#" class="mb-1" style="color: var(--primary-blue); text-decoration: none;">Contact Us</a>
+                    </div>
+                </div>
+                <!-- Right: Compliance Placeholder -->
+                <div class="col-md-4 d-flex flex-column align-items-center align-items-md-start">
+                    <!-- <div class="fw-bold mb-2" style="color: var(--primary-blue);">Compliance</div> -->
+                    <div class="d-flex gap-3 justify-content-center justify-content-md-start">
+                        <!-- Place compliance images here if needed -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background: #006BFF; color: #fff; padding: 1rem 0; text-align: center; font-size:0.98rem;">
+            Copyright &copy; <?php echo date('Y'); ?> Brgy. Luzviminda Uno, Dasmarinas City, Cavite
+        </div>
+    </footer>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0" nonce="YOUR_NONCE"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const row = document.getElementById('carouselCardsRow');
+      const cards = Array.from(row.children).slice(0, 5); // Only original cards
+      const cardWidth = cards[0].offsetWidth + 24; // 24px margin-right
+      const visible = 3;
+      let start = 0;
+
+      // Clone first and last cards for infinite effect
+      for (let i = 0; i < visible; i++) {
+        row.appendChild(cards[i].cloneNode(true));
+        row.insertBefore(cards[cards.length - 1 - i].cloneNode(true), row.firstChild);
+      }
+
+      let total = row.children.length;
+      let position = visible; // Start at the first real card
+
+      // Carousel indicators
+      const indicatorsContainer = document.getElementById('carouselIndicators');
+      const numIndicators = cards.length;
+      let indicators = [];
+      function renderIndicators() {
+        indicatorsContainer.innerHTML = '';
+        indicators = [];
+        for (let i = 0; i < numIndicators; i++) {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'carousel-indicator-dot';
+          dot.setAttribute('aria-label', `Go to slide ${i+1}`);
+          dot.addEventListener('click', function() {
+            position = visible + i;
+            updatePosition();
+          });
+          indicatorsContainer.appendChild(dot);
+          indicators.push(dot);
+        }
+      }
+      function updateIndicators() {
+        const idx = (position - visible + numIndicators) % numIndicators;
+        indicators.forEach((dot, i) => {
+          dot.classList.toggle('active', i === idx);
+        });
+      }
+      renderIndicators();
+
+      function updatePosition(animate = true) {
+        if (animate) {
+          row.style.transition = 'transform 0.5s cubic-bezier(.4,2,.3,1)';
+        } else {
+          row.style.transition = 'none';
+        }
+        row.style.transform = `translateX(-${position * cardWidth}px)`;
+        updateIndicators();
+      }
+
+      function nextCard() {
+        if (position < total - visible) {
+          position++;
+          updatePosition();
+          if (position === total - visible) {
+            setTimeout(() => {
+              position = visible;
+              updatePosition(false);
+            }, 500);
+          }
+        }
+      }
+
+      function prevCard() {
+        if (position > 0) {
+          position--;
+          updatePosition();
+          if (position === 0) {
+            setTimeout(() => {
+              position = total - visible * 2;
+              updatePosition(false);
+            }, 500);
+          }
+        }
+      }
+
+      // Initial position
+      updatePosition(false);
+      updateIndicators();
+
+      document.getElementById('carouselNext').addEventListener('click', function(e) {
+        e.preventDefault();
+        nextCard();
+      });
+      document.getElementById('carouselPrev').addEventListener('click', function(e) {
+        e.preventDefault();
+        prevCard();
+      });
+
+      // Responsive: recalculate cardWidth on resize
+      window.addEventListener('resize', () => {
+        setTimeout(() => {
+          const newCardWidth = row.children[0].offsetWidth + 24;
+          if (newCardWidth !== cardWidth) {
+            updatePosition(false);
+          }
+        }, 300);
+      });
+    });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,289 @@
+<?php // Registration form, no backend logic yet ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="icon" href="assets/logoo.png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            background: url('assets/cover.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+        .bg-blur {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(13, 110, 253, 0.45);
+            backdrop-filter: blur(4px);
+            z-index: 0;
+        }
+        .register-card {
+            z-index: 1;
+            background: rgba(255,255,255,0.92);
+            border-radius: 2.2rem;
+            box-shadow: 0 12px 48px rgba(13,110,253,0.13), 0 2px 8px rgba(0,0,0,0.08);
+            padding: 3.5rem 2.5rem 2.5rem 2.5rem;
+            max-width: 980px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .register-accent {
+            width: 70px;
+            height: 6px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #1976d2 0%, #28a745 100%);
+            box-shadow: 0 2px 8px rgba(25,118,210,0.10);
+            margin: 0 auto 1.5rem auto;
+        }
+        .logo {
+            width: 82px;
+            height: 82px;
+            object-fit: contain;
+            margin-bottom: 0.7rem;
+            border-radius: 50%;
+            box-shadow: 0 4px 18px rgba(25, 118, 210, 0.13);
+            background: #fff;
+            padding: 4px;
+        }
+        .system-title {
+            font-size: 1.32em;
+            font-weight: 800;
+            color: #1976d2;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.2rem;
+        }
+        .system-subtitle {
+            font-size: 1.01em;
+            color: #3a3a3a;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+        }
+        .form-floating > .form-control:focus ~ label {
+            color: #0d6efd;
+        }
+        .form-floating .form-control {
+            font-size: 1.08em;
+            padding-top: 1.2rem;
+            padding-bottom: 1.2rem;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888;
+        }
+        .password-strength {
+            height: 6px;
+            border-radius: 3px;
+            margin-top: 2px;
+            margin-bottom: 8px;
+            background: #e9ecef;
+            overflow: hidden;
+        }
+        .password-strength-bar {
+            height: 100%;
+            transition: width 0.3s;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 2.2rem;
+            color: #bbb;
+            font-size: 1.05em;
+        }
+        .form-footer a {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        .btn-primary {
+            font-size: 1.13em;
+            font-weight: 600;
+            border-radius: 2em;
+            padding: 0.7em 0;
+            box-shadow: 0 2px 8px rgba(25,118,210,0.08);
+        }
+        @media (max-width: 600px) {
+            .register-card { padding: 2rem 0.7rem; max-width: 98vw; }
+            .logo { width: 60px; height: 60px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-blur"></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="register-card w-100">
+            <div class="text-center mb-4">
+                <div class="register-accent"></div>
+                <a href="index.php"><img src="assets/logoo.png" alt="Logo" class="logo"></a>
+                <div class="system-title">BarangayHub</div>
+                <div class="system-subtitle">Management Information System<br>of Barangay Luzviminda Uno</div>
+            </div>
+            <form method="post" autocomplete="off" novalidate>
+                <div class="row g-3 mb-2">
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" required>
+                            <label for="fname">First Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="mname" name="mname" placeholder="Middle Name">
+                            <label for="mname">Middle Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" required>
+                            <label for="lname">Last Name</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3 mb-2">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" required pattern="[0-9]{11}">
+                            <label for="mobile">Mobile Number</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3 mb-2">
+                    <div class="col-md-8">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
+                            <label for="address">Address</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="household" name="household" placeholder="Household No.">
+                            <label for="household">Household No.</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3 mb-2">
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" id="dob" name="dob" placeholder="Date of Birth" required>
+                            <label for="dob">Date of Birth</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <select class="form-select" id="gender" name="gender" required>
+                                <option value="" selected disabled>Choose...</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <label for="gender">Gender</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <select class="form-select" id="civil" name="civil" required>
+                                <option value="" selected disabled>Choose...</option>
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Widowed">Widowed</option>
+                                <option value="Separated">Separated</option>
+                            </select>
+                            <label for="civil">Civil Status</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3 mb-2">
+                    <div class="col-md-6 position-relative">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Create Password" required oninput="checkStrength()">
+                            <label for="password">Create Password</label>
+                            <span class="eye-icon" onclick="togglePassword('password', this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.12 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.133 13.133 0 0 1 1.172 8z"/>
+                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm0 1a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="password-strength">
+                            <div id="strength-bar" class="password-strength-bar" style="width:0%;background:#e9ecef;"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 position-relative">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required oninput="checkMatch()">
+                            <label for="confirm_password">Confirm Password</label>
+                            <span class="eye-icon" onclick="togglePassword('confirm_password', this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.12 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.133 13.133 0 0 1 1.172 8z"/>
+                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm0 1a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <div id="match-message" style="font-size:0.95em; color:#dc3545; margin-top:2px;"></div>
+                    </div>
+                </div>
+                <button class="btn btn-primary w-100 mt-2" type="submit">Sign Up</button>
+            </form>
+            <div class="form-footer">
+                Already have an account? <a href="login.php">Sign in</a>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        function togglePassword(id, el) {
+            const input = document.getElementById(id);
+            if (input.type === 'password') {
+                input.type = 'text';
+                el.innerHTML = `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' viewBox='0 0 16 16'><path d='M13.359 11.238l2.122 2.122a.75.75 0 1 1-1.06 1.06l-2.122-2.121A7.97 7.97 0 0 1 8 13.5c-5 0-8-5.5-8-5.5a15.634 15.634 0 0 1 3.34-3.778l-2.12-2.12a.75.75 0 1 1 1.06-1.06l14 14a.75.75 0 0 1-1.06 1.06l-2.121-2.122zM8 12.5c2.12 0 3.879-1.168 5.168-2.457A13.133 13.133 0 0 0 14.828 8c-.058-.087-.122-.183-.195-.288-.335-.48-.83-1.12-1.465-1.755C11.879 4.668 10.12 3.5 8 3.5c-.638 0-1.25.07-1.828.2l1.53 1.53A2.5 2.5 0 0 1 10.5 8c0 .638-.07 1.25-.2 1.828l1.53 1.53c.13-.578.2-1.19.2-1.828z'/></svg>`;
+            } else {
+                input.type = 'password';
+                el.innerHTML = `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' viewBox='0 0 16 16'><path d='M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.12 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.133 13.133 0 0 1 1.172 8z'/><path d='M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm0 1a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z'/></svg>`;
+            }
+        }
+        function checkStrength() {
+            const pwd = document.getElementById('password').value;
+            const bar = document.getElementById('strength-bar');
+            let strength = 0;
+            if (pwd.length >= 8) strength++;
+            if (/[A-Z]/.test(pwd)) strength++;
+            if (/[a-z]/.test(pwd)) strength++;
+            if (/[0-9]/.test(pwd)) strength++;
+            if (/[^A-Za-z0-9]/.test(pwd)) strength++;
+            let width = ["0%","20%","40%","60%","80%","100%"][strength];
+            let color = ["#e9ecef","#dc3545","#fd7e14","#ffc107","#0d6efd","#198754"][strength];
+            bar.style.width = width;
+            bar.style.background = color;
+        }
+        function checkMatch() {
+            const pwd = document.getElementById('password').value;
+            const cpwd = document.getElementById('confirm_password').value;
+            const msg = document.getElementById('match-message');
+            if (cpwd.length === 0) {
+                msg.textContent = '';
+            } else if (pwd === cpwd) {
+                msg.textContent = 'Passwords match!';
+                msg.style.color = '#198754';
+            } else {
+                msg.textContent = 'Passwords do not match!';
+                msg.style.color = '#dc3545';
+            }
+        }
+    </script>
+</body>
+</html> 
